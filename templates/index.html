@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <p> inherited template</p>
+    <h1>Task Master</h1>
+    <div class="content">
+        <table border="1">
+            <thead>
+                <th>Task</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{task.content}}</td>
+                    <td>{{task.date_created.date()}}</td>
+                    <td>
+                        <a href="/delete/{{task.id}}" >Delete</a>
+                        <br>
+                        <a href="/update/{{task.id}}" >Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+        <form action="/" method="POST">
+            <input type="text" name="content" required>
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
 {% endblock %}
